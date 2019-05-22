@@ -147,6 +147,20 @@ public class RestAuthController {
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/taobao")
                         .build());
                 break;
+            case "google":
+                authRequest = new AuthGoogleRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://localhost:8443/oauth/callback/google")
+                        .build());
+                break;
+            case "facebook":
+                authRequest = new AuthFacebookRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("https://eadmin.innodev.com.cn/oauth/callback/facebook")
+                        .build());
+                break;
         }
         if (null == authRequest) {
             throw new AuthException("未获取到有效的Auth配置");
