@@ -111,7 +111,6 @@ public class RestAuthController {
                         .build());
                 break;
             case "alipay":
-                // 支付宝在创建回调地址时，不允许使用localhost或者127.0.0.1，所以这儿的回调地址使用的局域网内的ip
                 authRequest = new AuthAlipayRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
@@ -158,7 +157,42 @@ public class RestAuthController {
                 authRequest = new AuthFacebookRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
-                        .redirectUri("https://eadmin.innodev.com.cn/oauth/callback/facebook")
+                        .redirectUri("https://www.zhyd.me/oauth/callback/facebook")
+                        .build());
+                break;
+            case "douyin":
+                authRequest = new AuthDouyinRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/douyin")
+                        .build());
+                break;
+            case "linkedin":
+                authRequest = new AuthLinkedinRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/linkedin")
+                        .build());
+                break;
+            case "microsoft":
+                authRequest = new AuthMicrosoftRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/microsoft")
+                        .build());
+                break;
+            case "mi":
+                authRequest = new AuthMiRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/mi")
+                        .build());
+                break;
+            case "toutiao":
+                authRequest = new AuthToutiaoRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/toutiao")
                         .build());
                 break;
         }
