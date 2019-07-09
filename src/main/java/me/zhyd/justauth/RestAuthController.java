@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author yadong.zhang (yadong.zhang0415(a)gmail.com)
@@ -27,9 +28,15 @@ import java.io.IOException;
 @RequestMapping("/oauth")
 public class RestAuthController {
 
+    /**
+     * 存放state，授权、登录成功后，删除此次授权过程中生成的state
+     */
+    private static ConcurrentHashMap<String, String> stateBucket = new ConcurrentHashMap<>();
+
     @RequestMapping("/render/{source}")
     public void renderAuth(@PathVariable("source") String source, HttpServletResponse response) throws IOException {
         System.out.println("进入render：" + source);
+        System.out.println("IP：" + IpUtils.getIp());
         AuthRequest authRequest = getAuthRequest(source);
         String authorizeUrl = authRequest.authorize();
         System.out.println(authorizeUrl);
@@ -42,9 +49,13 @@ public class RestAuthController {
     @RequestMapping("/callback/{source}")
     public Object login(@PathVariable("source") String source, AuthCallback callback) {
         System.out.println("进入callback：" + source + " callback params：" + JSONObject.toJSONString(callback));
+        System.out.println("IP：" + IpUtils.getIp());
         AuthRequest authRequest = getAuthRequest(source);
         AuthResponse response = authRequest.login(callback);
         System.out.println(JSONObject.toJSONString(response));
+
+        // 登录成功后，清除state
+        this.removeState(source);
         return response;
     }
 
@@ -68,8 +79,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/dingtalk")
-                        // state建议格式请参考：https://gitee.com/yadong.zhang/JustAuth/wikis/Q&A?sort_id=1513074#3-%E5%8D%87%E7%BA%A7%E5%88%B0180%E5%90%8E%E5%AF%B9%E4%BA%8Estate%E5%8F%82%E6%95%B0%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E6%AE%8A%E8%A6%81%E6%B1%82%E5%90%97
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "baidu":
@@ -77,7 +87,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/baidu")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "github":
@@ -85,7 +95,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/github")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "gitee":
@@ -93,7 +103,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/gitee")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "weibo":
@@ -101,7 +111,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/weibo")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "coding":
@@ -109,7 +119,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/tencentCloud")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "tencentCloud":
@@ -117,7 +127,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/tencentCloud")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "oschina":
@@ -125,7 +135,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/oschina")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "alipay":
@@ -135,7 +145,7 @@ public class RestAuthController {
                         .clientSecret("")
                         .alipayPublicKey("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/alipay")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "qq":
@@ -143,7 +153,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/qq")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "wechat":
@@ -151,7 +161,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/wechat")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "csdn":
@@ -159,7 +169,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/wechat")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "taobao":
@@ -167,7 +177,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/taobao")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "google":
@@ -175,7 +185,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/google")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "facebook":
@@ -183,7 +193,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("https://127.0.0.1:8443/oauth/callback/facebook")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "douyin":
@@ -191,7 +201,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/douyin")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "linkedin":
@@ -199,7 +209,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/linkedin")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "microsoft":
@@ -207,7 +217,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/microsoft")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "mi":
@@ -215,7 +225,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/mi")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
             case "toutiao":
@@ -223,7 +233,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/toutiao")
-                        .state(source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4))
+                        .state(getState(source))
                         .build());
                 break;
         }
@@ -231,5 +241,35 @@ public class RestAuthController {
             throw new AuthException("未获取到有效的Auth配置");
         }
         return authRequest;
+    }
+
+    /**
+     * state建议格式请参考：https://gitee.com/yadong.zhang/JustAuth/wikis/Q&A?sort_id=1513074#3-%E5%8D%87%E7%BA%A7%E5%88%B0180%E5%90%8E%E5%AF%B9%E4%BA%8Estate%E5%8F%82%E6%95%B0%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E6%AE%8A%E8%A6%81%E6%B1%82%E5%90%97
+     *
+     * @param source
+     * @return
+     */
+    private String getState(String source) {
+        String key = (source + IpUtils.getIp()).replaceAll("\\.", "");
+        System.out.println("state key：" + key);
+        if (stateBucket.containsKey(key)) {
+            System.out.println("当前请求存在可用的state：" + stateBucket.get(key));
+            return stateBucket.get(key);
+        }
+        String state = (source + "_" + IpUtils.getIp() + "_" + RandomUtil.randomString(4)).replaceAll("\\.", "");
+        System.out.println("当前请求不存在可用的state，生成新的state：" + state);
+        stateBucket.put(key, state);
+        return state;
+    }
+
+    /**
+     * 登录成功后，清除state
+     *
+     * @param source
+     */
+    private void removeState(String source) {
+        String key = (source + IpUtils.getIp()).replaceAll("\\.", "");
+        System.out.println("授权登录成功，清空state: " + stateBucket.get(key));
+        stateBucket.remove(key);
     }
 }
