@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author yadong.zhang (yadong.zhang0415(a)gmail.com)
@@ -27,11 +26,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @RestController
 @RequestMapping("/oauth")
 public class RestAuthController {
-
-    /**
-     * 存放state，授权、登录成功后，删除此次授权过程中生成的state
-     */
-    private static ConcurrentHashMap<String, String> stateBucket = new ConcurrentHashMap<>();
 
     @RequestMapping("/render/{source}")
     public void renderAuth(@PathVariable("source") String source, HttpServletResponse response) throws IOException {
@@ -169,7 +163,7 @@ public class RestAuthController {
                 authRequest = new AuthCsdnRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
-                        .redirectUri("http://127.0.0.1:8443/oauth/callback/wechat")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/csdn")
                         .state(AuthState.create(source))
                         .build());
                 break;
@@ -193,7 +187,7 @@ public class RestAuthController {
                 authRequest = new AuthFacebookRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
-                        .redirectUri("https://127.0.0.1:8443/oauth/callback/facebook")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/facebook")
                         .state(AuthState.create(source))
                         .build());
                 break;
@@ -234,6 +228,39 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/toutiao")
+                        .state(AuthState.create(source))
+                        .build());
+                break;
+            case "teambition":
+                authRequest = new AuthTeambitionRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/teambition")
+                        .state(AuthState.create(source))
+                        .build());
+                break;
+            case "pinterest":
+                authRequest = new AuthPinterestRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/pinterest")
+                        .state(AuthState.create(source))
+                        .build());
+                break;
+            case "renren":
+                authRequest = new AuthRenrenRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/teambition")
+                        .state(AuthState.create(source))
+                        .build());
+                break;
+            case "stackoverflow":
+                authRequest = new AuthStackOverflowRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/login_success")
+                        .stackOverflowKey("")
                         .state(AuthState.create(source))
                         .build());
                 break;
