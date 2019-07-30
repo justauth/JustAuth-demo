@@ -5,7 +5,6 @@ import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.exception.AuthException;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
-import me.zhyd.oauth.model.AuthResponseStatus;
 import me.zhyd.oauth.model.AuthToken;
 import me.zhyd.oauth.request.*;
 import me.zhyd.oauth.utils.AuthStateUtils;
@@ -42,9 +41,6 @@ public class RestAuthController {
     @RequestMapping("/callback/{source}")
     public Object login(@PathVariable("source") String source, AuthCallback callback) {
         System.out.println("进入callback：" + source + " callback params：" + JSONObject.toJSONString(callback));
-        if (!callback.checkState()) {
-            return AuthResponseStatus.ILLEGAL_REQUEST;
-        }
         AuthRequest authRequest = getAuthRequest(source);
         AuthResponse response = authRequest.login(callback);
         System.out.println(JSONObject.toJSONString(response));
