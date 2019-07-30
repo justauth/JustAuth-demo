@@ -5,10 +5,10 @@ import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.exception.AuthException;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
+import me.zhyd.oauth.model.AuthResponseStatus;
 import me.zhyd.oauth.model.AuthToken;
 import me.zhyd.oauth.request.*;
-import me.zhyd.oauth.utils.AuthState;
-import me.zhyd.oauth.utils.IpUtils;
+import me.zhyd.oauth.utils.AuthStateUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,9 +30,8 @@ public class RestAuthController {
     @RequestMapping("/render/{source}")
     public void renderAuth(@PathVariable("source") String source, HttpServletResponse response) throws IOException {
         System.out.println("进入render：" + source);
-        System.out.println("IP：" + IpUtils.getIp());
         AuthRequest authRequest = getAuthRequest(source);
-        String authorizeUrl = authRequest.authorize();
+        String authorizeUrl = authRequest.authorize(AuthStateUtils.createState());
         System.out.println(authorizeUrl);
         response.sendRedirect(authorizeUrl);
     }
@@ -43,14 +42,12 @@ public class RestAuthController {
     @RequestMapping("/callback/{source}")
     public Object login(@PathVariable("source") String source, AuthCallback callback) {
         System.out.println("进入callback：" + source + " callback params：" + JSONObject.toJSONString(callback));
-        System.out.println("获取state中的body信息：" + AuthState.getBody(source, callback.getState(), String.class));
-        System.out.println("IP：" + IpUtils.getIp());
+        if (!callback.checkState()) {
+            return AuthResponseStatus.ILLEGAL_REQUEST;
+        }
         AuthRequest authRequest = getAuthRequest(source);
         AuthResponse response = authRequest.login(callback);
         System.out.println(JSONObject.toJSONString(response));
-
-        // 登录成功后，清除state
-        AuthState.delete(source);
         return response;
     }
 
@@ -74,7 +71,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/dingtalk")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "baidu":
@@ -82,7 +78,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/baidu")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "github":
@@ -90,7 +85,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/github")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "gitee":
@@ -98,7 +92,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/gitee")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "weibo":
@@ -106,7 +99,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/weibo")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "coding":
@@ -114,7 +106,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/tencentCloud")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "tencentCloud":
@@ -122,7 +113,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/tencentCloud")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "oschina":
@@ -130,7 +120,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/oschina")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "alipay":
@@ -140,7 +129,6 @@ public class RestAuthController {
                         .clientSecret("")
                         .alipayPublicKey("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/alipay")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "qq":
@@ -148,7 +136,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/qq")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "wechat":
@@ -156,7 +143,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/wechat")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "csdn":
@@ -164,7 +150,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/csdn")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "taobao":
@@ -172,7 +157,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/taobao")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "google":
@@ -180,7 +164,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/google")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "facebook":
@@ -188,7 +171,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/facebook")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "douyin":
@@ -196,7 +178,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/douyin")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "linkedin":
@@ -204,7 +185,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/linkedin")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "microsoft":
@@ -212,7 +192,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/microsoft")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "mi":
@@ -220,7 +199,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/mi")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "toutiao":
@@ -228,7 +206,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/toutiao")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "teambition":
@@ -236,7 +213,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/teambition")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "pinterest":
@@ -244,7 +220,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/pinterest")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "renren":
@@ -252,7 +227,6 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/teambition")
-                        .state(AuthState.create(source))
                         .build());
                 break;
             case "stackoverflow":
@@ -261,7 +235,6 @@ public class RestAuthController {
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/login_success")
                         .stackOverflowKey("")
-                        .state(AuthState.create(source))
                         .build());
                 break;
         }
