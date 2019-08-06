@@ -233,6 +233,23 @@ public class RestAuthController {
                         .stackOverflowKey("")
                         .build());
                 break;
+            case "huawei":
+                authRequest = new AuthHuaweiRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/huawei")
+                        .build());
+                break;
+            case "wechatEnterprise":
+                authRequest = new AuthHuaweiRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/wechatEnterprise")
+                        .agentId("")
+                        .build());
+                break;
+            default:
+                break;
         }
         if (null == authRequest) {
             throw new AuthException("未获取到有效的Auth配置");
