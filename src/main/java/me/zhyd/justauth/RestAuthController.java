@@ -247,6 +247,19 @@ public class RestAuthController {
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/wechatEnterprise")
                         .agentId("")
                         .build());
+            case "kujiale":
+                authRequest = new AuthKujialeRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/kujiale")
+                        .build());
+                break;
+            case "gitlab":
+                authRequest = new AuthGitlabRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://localhost:8443/oauth/callback/gitlab")
+                        .build());
                 break;
             default:
                 break;
