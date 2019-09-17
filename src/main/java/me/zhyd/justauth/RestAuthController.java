@@ -53,6 +53,12 @@ public class RestAuthController {
         return authRequest.revoke(AuthToken.builder().accessToken(token).build());
     }
 
+    @RequestMapping("/refresh/{source}")
+    public Object refreshAuth(@PathVariable("source") String source, String token){
+        AuthRequest authRequest = getAuthRequest(source);
+        return authRequest.refresh(AuthToken.builder().refreshToken(token).build());
+    }
+
     /**
      * 根据具体的授权来源，获取授权请求工具类
      *
@@ -247,6 +253,7 @@ public class RestAuthController {
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/wechatEnterprise")
                         .agentId("")
                         .build());
+                break;
             case "kujiale":
                 authRequest = new AuthKujialeRequest(AuthConfig.builder()
                         .clientId("")
@@ -259,6 +266,20 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://localhost:8443/oauth/callback/gitlab")
+                        .build());
+                break;
+            case "meituan":
+                authRequest = new AuthMeituanRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://localhost:8443/oauth/callback/meituan")
+                        .build());
+                break;
+            case "eleme":
+                authRequest = new AuthElemeRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://dblog-web.zhyd.me/oauth/callback/eleme")
                         .build());
                 break;
             default:
