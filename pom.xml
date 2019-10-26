@@ -51,6 +51,12 @@
             <artifactId>alipay-sdk-java</artifactId>
             <version>3.7.4.ALL</version>
         </dependency>
+
+        <!-- 实现自定义的state缓存 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
