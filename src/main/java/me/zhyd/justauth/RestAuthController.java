@@ -282,6 +282,20 @@ public class RestAuthController {
                         .redirectUri("http://dblog-web.zhyd.me/oauth/callback/eleme")
                         .build());
                 break;
+            case "mygitlab":
+                authRequest = new AuthMyGitlabRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/mygitlab")
+                        .build());
+                break;
+            case "twitter":
+                authRequest = new AuthTwitterRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://127.0.0.1:8443/oauth/callback/twitter")
+                        .build());
+                break;
             default:
                 break;
         }
