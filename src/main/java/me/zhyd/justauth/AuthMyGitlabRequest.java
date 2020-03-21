@@ -32,8 +32,8 @@ public class AuthMyGitlabRequest extends AuthDefaultRequest {
 
     @Override
     protected AuthToken getAccessToken(AuthCallback authCallback) {
-        HttpResponse response = doPostAuthorizationCode(authCallback.getCode());
-        JSONObject object = JSONObject.parseObject(response.body());
+        String body = doPostAuthorizationCode(authCallback.getCode());
+        JSONObject object = JSONObject.parseObject(body);
 
         this.checkResponse(object);
 
@@ -48,8 +48,8 @@ public class AuthMyGitlabRequest extends AuthDefaultRequest {
 
     @Override
     protected AuthUser getUserInfo(AuthToken authToken) {
-        HttpResponse response = doGetUserInfo(authToken);
-        JSONObject object = JSONObject.parseObject(response.body());
+        String body = doGetUserInfo(authToken);
+        JSONObject object = JSONObject.parseObject(body);
 
         this.checkResponse(object);
 

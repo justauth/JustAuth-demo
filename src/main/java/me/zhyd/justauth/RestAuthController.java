@@ -141,7 +141,7 @@ public class RestAuthController {
                         .build());
                 break;
             case "wechat":
-                authRequest = new AuthWeChatRequest(AuthConfig.builder()
+                authRequest = new AuthWeChatOpenRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/wechat")
@@ -247,7 +247,7 @@ public class RestAuthController {
                         .build());
                 break;
             case "wechatEnterprise":
-                authRequest = new AuthHuaweiRequest(AuthConfig.builder()
+                authRequest = new AuthWeChatEnterpriseRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/wechatEnterprise")
@@ -294,6 +294,13 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/twitter")
+                        .build());
+                break;
+            case "wechatMp":
+                authRequest = new AuthWeChatMpRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("")
                         .build());
                 break;
             default:
