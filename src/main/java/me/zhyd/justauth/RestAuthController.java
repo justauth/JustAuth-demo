@@ -162,6 +162,9 @@ public class RestAuthController {
                         .build());
                 break;
             case "google":
+                // 国外平台 目前必须要手动配置代理
+                System.setProperty("proxyPort", "10080");
+                System.setProperty("proxyHost", "127.0.0.1");
                 authRequest = new AuthGoogleRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
@@ -169,6 +172,9 @@ public class RestAuthController {
                         .build());
                 break;
             case "facebook":
+                // 国外平台 目前必须要手动配置代理
+                System.setProperty("proxyPort", "10080");
+                System.setProperty("proxyHost", "127.0.0.1");
                 authRequest = new AuthFacebookRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
