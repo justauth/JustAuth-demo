@@ -290,6 +290,9 @@ public class RestAuthController {
                         .build());
                 break;
             case "twitter":
+                // 国外平台 目前必须要手动配置代理
+                System.setProperty("proxyPort", "10080");
+                System.setProperty("proxyHost", "127.0.0.1");
                 authRequest = new AuthTwitterRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
