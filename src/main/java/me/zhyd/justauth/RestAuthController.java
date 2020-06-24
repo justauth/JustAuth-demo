@@ -1,6 +1,7 @@
 package me.zhyd.justauth;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xkcoding.http.config.HttpConfig;
 import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.exception.AuthException;
 import me.zhyd.oauth.model.AuthCallback;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 
 /**
  * @author yadong.zhang (yadong.zhang0415(a)gmail.com)
@@ -54,7 +57,7 @@ public class RestAuthController {
     }
 
     @RequestMapping("/refresh/{source}")
-    public Object refreshAuth(@PathVariable("source") String source, String token){
+    public Object refreshAuth(@PathVariable("source") String source, String token) {
         AuthRequest authRequest = getAuthRequest(source);
         return authRequest.refresh(AuthToken.builder().refreshToken(token).build());
     }
@@ -108,13 +111,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/tencentCloud")
-                        .build());
-                break;
-            case "tencentCloud":
-                authRequest = new AuthTencentCloudRequest(AuthConfig.builder()
-                        .clientId("")
-                        .clientSecret("")
-                        .redirectUri("http://127.0.0.1:8443/oauth/callback/tencentCloud")
+                        .codingGroupName("")
                         .build());
                 break;
             case "oschina":
@@ -162,23 +159,27 @@ public class RestAuthController {
                         .build());
                 break;
             case "google":
-                // 国外平台 目前必须要手动配置代理
-                System.setProperty("proxyPort", "10080");
-                System.setProperty("proxyHost", "127.0.0.1");
                 authRequest = new AuthGoogleRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/google")
+                        // 针对国外平台配置代理
+                        .httpConfig(HttpConfig.builder()
+                                .timeout(15000)
+                                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 10080)))
+                                .build())
                         .build());
                 break;
             case "facebook":
-                // 国外平台 目前必须要手动配置代理
-                System.setProperty("proxyPort", "10080");
-                System.setProperty("proxyHost", "127.0.0.1");
                 authRequest = new AuthFacebookRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/facebook")
+                        // 针对国外平台配置代理
+                        .httpConfig(HttpConfig.builder()
+                                .timeout(15000)
+                                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 10080)))
+                                .build())
                         .build());
                 break;
             case "douyin":
@@ -228,6 +229,11 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/pinterest")
+                        // 针对国外平台配置代理
+                        .httpConfig(HttpConfig.builder()
+                                .timeout(15000)
+                                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 10080)))
+                                .build())
                         .build());
                 break;
             case "renren":
@@ -296,13 +302,15 @@ public class RestAuthController {
                         .build());
                 break;
             case "twitter":
-                // 国外平台 目前必须要手动配置代理
-                System.setProperty("proxyPort", "10080");
-                System.setProperty("proxyHost", "127.0.0.1");
                 authRequest = new AuthTwitterRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/twitter")
+                        // 针对国外平台配置代理
+                        .httpConfig(HttpConfig.builder()
+                                .timeout(15000)
+                                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 10080)))
+                                .build())
                         .build());
                 break;
             case "wechatMp":

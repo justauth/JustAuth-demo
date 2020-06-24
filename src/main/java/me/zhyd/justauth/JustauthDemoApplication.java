@@ -6,13 +6,15 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @ControllerAdvice
@@ -29,7 +31,9 @@ public class JustauthDemoApplication implements ApplicationRunner {
 
     @RequestMapping("")
     public ModelAndView index() {
-        return new ModelAndView("index");
+        Map<String, Object> map = new HashMap<>();
+        map.put("enableAuthPlatforms", JustAuthPlatformInfo.getPlatformInfos());
+        return new ModelAndView("index", map);
     }
 
 
