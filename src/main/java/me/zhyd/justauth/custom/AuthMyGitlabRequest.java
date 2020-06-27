@@ -1,4 +1,4 @@
-package me.zhyd.justauth;
+package me.zhyd.justauth.custom;
 
 import com.alibaba.fastjson.JSONObject;
 import me.zhyd.oauth.cache.AuthStateCache;

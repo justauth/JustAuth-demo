@@ -1,4 +1,4 @@
-package me.zhyd.justauth;
+package me.zhyd.justauth.cache;
 
 import me.zhyd.oauth.cache.AuthCacheConfig;
 import me.zhyd.oauth.cache.AuthStateCache;

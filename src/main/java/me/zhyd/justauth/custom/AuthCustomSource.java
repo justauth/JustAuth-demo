@@ -1,4 +1,4 @@
-package me.zhyd.justauth;
+package me.zhyd.justauth.custom;
 
 import me.zhyd.oauth.config.AuthSource;
 
