@@ -128,7 +128,7 @@ public class RestAuthController {
      */
     private AuthRequest getAuthRequest(String source) {
         AuthRequest authRequest = null;
-        switch (source) {
+        switch (source.toLowerCase()) {
             case "dingtalk":
                 authRequest = new AuthDingTalkRequest(AuthConfig.builder()
                         .clientId("")
