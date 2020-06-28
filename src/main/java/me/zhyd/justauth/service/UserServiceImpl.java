@@ -1,9 +1,16 @@
 package me.zhyd.justauth.service;
 
+import com.alibaba.fastjson.JSONObject;
 import me.zhyd.oauth.model.AuthUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundHashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import javax.annotation.PostConstruct;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author yadong.zhang (yadong.zhang0415(a)gmail.com)
@@ -14,25 +21,38 @@ import java.util.*;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private static final Map<String, AuthUser> BUCKET = new LinkedHashMap<>();
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    private BoundHashOperations<String, String, AuthUser> valueOperations;
+
+    @PostConstruct
+    public void init() {
+        valueOperations = redisTemplate.boundHashOps("JUSTAUTH::USERS");
+    }
 
     @Override
     public AuthUser save(AuthUser user) {
-        return BUCKET.put(user.getUuid(), user);
+        valueOperations.put(user.getUuid(), user);
+        return user;
     }
 
     @Override
     public AuthUser getByUuid(String uuid) {
-        return BUCKET.get(uuid);
+        Object user = valueOperations.get(uuid);
+        if(null == user) {
+            return null;
+        }
+        return JSONObject.parseObject(JSONObject.toJSONString(user), AuthUser.class);
     }
 
     @Override
     public List<AuthUser> listAll() {
-        return new LinkedList<>(BUCKET.values());
+        return new LinkedList<>(Objects.requireNonNull(valueOperations.values()));
     }
 
     @Override
     public void remove(String uuid) {
-        BUCKET.remove(uuid);
+        valueOperations.delete(uuid);
     }
 }
