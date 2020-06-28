@@ -46,6 +46,12 @@
             <artifactId>JustAuth</artifactId>
             <version>1.15.5</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+            <optional>true</optional>
+        </dependency>
         <!-- JustAuth1.9.4版本后，如果需要使用支付宝登录，需要单独引用该依赖 -->
         <dependency>
             <groupId>com.alipay.sdk</groupId>
