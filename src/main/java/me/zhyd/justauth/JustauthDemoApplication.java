@@ -38,6 +38,7 @@ public class JustauthDemoApplication implements ApplicationRunner {
     public ModelAndView index() {
         Map<String, Object> map = new HashMap<>();
         map.put("enableAuthPlatforms", JustAuthPlatformInfo.getPlatformInfos());
+        map.put("port", port);
         return new ModelAndView("index", map);
     }
 

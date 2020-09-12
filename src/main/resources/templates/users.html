@@ -43,6 +43,7 @@
                 <tr>
                     <th scope="col" style="width: 8%">编号</th>
                     <th scope="col" style="width: 27%">UUID</th>
+                    <th scope="col" style="width: 15%">Avatar</th>
                     <th scope="col" style="width: 15%">username</th>
                     <th scope="col" style="width: 10%">来源</th>
                     <th scope="col" style="width: 15%">accessToken</th>
@@ -54,8 +55,9 @@
                 <tr th:each="user,userStat: ${users}">
                     <th scope="row" th:text="${userStat.index}">1</th>
                     <td th:text="${user.uuid}" style="word-break: break-all;"></td>
+                    <td><img th:src="${user.avatar}" width="20" alt=""></td>
                     <td th:text="${user.username}"></td>
-                    <td th:text="${user.source}"></td>
+                    <td><img th:src="${'https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.1/' + #strings.toLowerCase(user.source) + '.png'}" th:title="${#strings.toLowerCase(user.source)}" width="20" alt=""></td>
                     <td><a href="javascript:;;" data-toggle="modal" data-target="#modal-show">查看详情</a><span th:text="${user.token.accessToken}" class="" style="display: none;"></span></td>
                     <td><a href="javascript:;;" data-toggle="modal" data-target="#modal-show">查看详情</a><span th:text="${user.rawUserInfo}" class="rawUserInfo" style="display: none;"></span></td>
                     <td><a href="javascript:;;" class="btn-refresh-token" th:data-uuid="${user.uuid}" th:data-source="${user.source}">refresh</a></td>
@@ -93,7 +95,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-showLabel">第三方用户原始数据</h5>
+                <h5 class="modal-title" id="modal-showLabel">信息</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

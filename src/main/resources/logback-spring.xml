@@ -6,13 +6,37 @@
             <pattern>%d{yyyy-MM-dd HH:mm:ss} [%class:%line] %-5level - %msg%n</pattern>
         </encoder>
     </appender>
+    <appender name="INFO-FILE-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- test -->
+        <File>./logs/log.log</File>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{20} - %msg%n</pattern>
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{20} - %msg%n</pattern>-->
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./logs/log-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
 
     <logger name="me.zhyd" level="DEBUG"/>
 
-    <logger name="me.zhyd.justauth" additivity="false">
+    <logger name="me.zhyd.justauth.RestAuthController" level="info" additivity="false">
         <appender-ref ref="STDOUT"/>
+        <appender-ref ref="INFO-FILE-APPENDER"/>
     </logger>
-    <root level="WARN">
+
+    <logger name="me.zhyd.justauth.cache.RedisConfig" level="info" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="INFO-FILE-APPENDER"/>
+    </logger>
+    <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>
 

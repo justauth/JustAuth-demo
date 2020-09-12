@@ -42,7 +42,7 @@
                 <div class="card-body">
                     <h5 class="card-title">
                         <img th:src="'https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.1/' + ${authPlatform.enname} + '.png'" alt="" style="width: 20px;position: relative;top: -2px;;" class="mr-1">
-                        <a target="_blank" th:href="'http://127.0.0.1:8443/oauth/render/' + ${authPlatform.enname}" th:text="${authPlatform.name}"></a>
+                        <a target="_blank" th:href="'http://127.0.0.1:' + ${port} + '/oauth/render/' + ${authPlatform.enname}" th:text="${authPlatform.name}"></a>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted" th:text="'使用' + ${authPlatform.name} + '登录'"></h6>
                     <span class="badge badge-light ml-1" th:text="${authPlatform.since}"></span>
