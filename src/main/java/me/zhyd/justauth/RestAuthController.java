@@ -369,7 +369,7 @@ public class RestAuthController {
                         .build());
                 break;
             case "wechat_enterprise":
-                authRequest = new AuthWeChatEnterpriseRequest(AuthConfig.builder()
+                authRequest = new AuthWeChatEnterpriseQrcodeRequest(AuthConfig.builder()
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://justauth.cn/oauth/callback/wechat_enterprise")
@@ -436,6 +436,20 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://localhost:8443/oauth/callback/aliyun")
+                        .build());
+                break;
+            case "xmly":
+                authRequest = new AuthXmlyRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://localhost:8443/oauth/callback/xmly")
+                        .build());
+                break;
+            case "feishu":
+                authRequest = new AuthFeishuRequest(AuthConfig.builder()
+                        .clientId("")
+                        .clientSecret("")
+                        .redirectUri("http://localhost:8443/oauth/callback/feishu")
                         .build());
                 break;
             default:

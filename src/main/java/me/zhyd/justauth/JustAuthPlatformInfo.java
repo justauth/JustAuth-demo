@@ -16,42 +16,44 @@ public enum JustAuthPlatformInfo {
     /**
      * 平台
      */
-    GITEE("Gitee", "https://docs.justauth.whnb.wang/#/oauth/gitee", "", "v1.0.1"),
-    BAIDU("百度", "", "", "v1.0.1"),
-    CODING("coding", "https://docs.justauth.whnb.wang/#/oauth/coding", "", "v1.0.1"),
-    CSDN("CSDN", "", "", "v1.0.1"),
-    DINGTALK("钉钉", "", "", "v1.0.1"),
-    GITHUB("Github", "https://docs.justauth.whnb.wang/#/oauth/github", "", "v1.0.1"),
-    OSCHINA("开源中国", "", "", "v1.0.1"),
-    ALIPAY("支付宝", "https://docs.justauth.whnb.wang/#/oauth/alipay", "", "v1.0.1"),
-    WEIBO("微博", "https://docs.justauth.whnb.wang/#/oauth/weibo", "", "v1.0.1"),
+    GITEE("Gitee", "https://docs.justauth.whnb.wang/#/oauth/gitee", "", "v1.0.1", false),
+    BAIDU("百度", "", "", "v1.0.1", false),
+    CODING("coding", "https://docs.justauth.whnb.wang/#/oauth/coding", "", "v1.0.1", false),
+    CSDN("CSDN", "", "", "v1.0.1", false),
+    DINGTALK("钉钉", "", "", "v1.0.1", false),
+    GITHUB("Github", "https://docs.justauth.whnb.wang/#/oauth/github", "", "v1.0.1", false),
+    OSCHINA("开源中国", "", "", "v1.0.1", false),
+    ALIPAY("支付宝", "https://docs.justauth.whnb.wang/#/oauth/alipay", "", "v1.0.1", false),
+    WEIBO("微博", "https://docs.justauth.whnb.wang/#/oauth/weibo", "", "v1.0.1", false),
 
-    DOUYIN("抖音", "", "", "v1.4.0"),
-    ELEME("饿了么", "", "", "v1.12.0"),
-    FACEBOOK("Facebook", "", "", "v1.3.0"),
-//    FEISHU("飞书", "", "", "1.14.0"),
-    GITLAB("Gitlab", "", "", "v1.11.0"),
-    GOOGLE("Google", "", "", "v1.3.0"),
-    HUAWEI("华为", "", "", "v1.10.0"),
-    JD("京东", "", "", "v1.15.1"),
-    KUJIALE("酷家乐", "https://docs.justauth.whnb.wang/#/oauth/kujiale", "", "v1.11.0"),
-    LINKEDIN("领英", "", "", "v1.4.0"),
-    MEITUAN("美团", "", "", "v1.12.0"),
-    MICROSOFT("微软", "", "", "v1.5.0"),
-    MI("小米", "", "", "v1.5.0"),
-    PINTEREST("Pinterest", "", "", "v1.9.0"),
-    QQ("QQ", "https://docs.justauth.whnb.wang/#/oauth/qq", "", "v1.1.0"),
-    RENREN("人人", "", "", "v1.9.0"),
-    STACK_OVERFLOW("Stack Overflow", "", "", "v1.9.0"),
-    TAOBAO("淘宝", "", "", "v1.2.0"),
-    TEAMBITION("Teambition", "", "", "v1.9.0"),
-    WECHAT_ENTERPRISE("微信企业版", "", "", "v1.10.0"),
-    WECHAT_MP("微信公众平台", "", "", "v1.14.0"),
-    WECHAT_OPEN("微信开放平台", "https://docs.justauth.whnb.wang/#/oauth/wechat_open", "", "v1.1.0"),
-    TOUTIAO("今日头条", "", "", "v1.6.0-beta"),
-    TWITTER("推特", "https://docs.justauth.whnb.wang/#/oauth/twitter", "", "v1.13.0"),
-    ALIYUN("阿里云", "https://docs.justauth.whnb.wang/#/oauth/aliyun", "", "v1.15.5"),
-    MYGITLAB("自定义的Gitlab", "", "", "-"),
+    DOUYIN("抖音", "", "", "v1.4.0", false),
+    ELEME("饿了么", "", "", "v1.12.0", false),
+    FACEBOOK("Facebook", "", "", "v1.3.0", false),
+    GITLAB("Gitlab", "", "", "v1.11.0", false),
+    GOOGLE("Google", "", "", "v1.3.0", false),
+    HUAWEI("华为", "", "", "v1.10.0", false),
+    JD("京东", "", "", "v1.15.1", false),
+    KUJIALE("酷家乐", "https://docs.justauth.whnb.wang/#/oauth/kujiale", "", "v1.11.0", false),
+    LINKEDIN("领英", "", "", "v1.4.0", false),
+    MEITUAN("美团", "", "", "v1.12.0", false),
+    MICROSOFT("微软", "", "", "v1.5.0", false),
+    MI("小米", "", "", "v1.5.0", false),
+    PINTEREST("Pinterest", "", "", "v1.9.0", false),
+    QQ("QQ", "https://docs.justauth.whnb.wang/#/oauth/qq", "", "v1.1.0", false),
+    RENREN("人人", "", "", "v1.9.0", false),
+    STACK_OVERFLOW("Stack Overflow", "", "", "v1.9.0", false),
+    TAOBAO("淘宝", "", "", "v1.2.0", false),
+    TEAMBITION("Teambition", "", "", "v1.9.0", false),
+    WECHAT_ENTERPRISE("企业微信二维码登录", "", "", "v1.10.0", false),
+    WECHAT_MP("微信公众平台", "", "", "v1.14.0", false),
+    WECHAT_OPEN("微信开放平台", "https://docs.justauth.whnb.wang/#/oauth/wechat_open", "", "v1.1.0", false),
+    TOUTIAO("今日头条", "", "", "v1.6.0-beta", false),
+    TWITTER("推特", "https://docs.justauth.whnb.wang/#/oauth/twitter", "", "v1.13.0", false),
+    ALIYUN("阿里云", "https://docs.justauth.whnb.wang/#/oauth/aliyun", "", "v1.15.5", false),
+    MYGITLAB("自定义的Gitlab", "", "", "v1.13.0", false),
+    XMLY("喜马拉雅", "", "", "v1.15.9", true),
+    WECHAT_ENTERPRISE_WEB("企业微信网页登录", "", "", "v1.15.9", true),
+    FEISHU("飞书", "", "", "1.15.9", true),
     ;
 
     // 平台名
@@ -62,17 +64,19 @@ public enum JustAuthPlatformInfo {
     private String apiDoc;
     // 集成该平台的 版本
     private String since;
+    private boolean latest;
 
-    JustAuthPlatformInfo(String name, String readme, String apiDoc, String since) {
+    JustAuthPlatformInfo(String name, String readme, String apiDoc, String since, boolean latest) {
         this.name = name;
         this.readme = readme;
         this.apiDoc = apiDoc;
         this.since = since;
+        this.latest = latest;
     }
 
-    public static List<Map<String, String>> getPlatformInfos() {
-        List<Map<String, String>> list = new LinkedList<>();
-        Map<String, String> map = null;
+    public static List<Map<String, Object>> getPlatformInfos() {
+        List<Map<String, Object>> list = new LinkedList<>();
+        Map<String, Object> map = null;
         JustAuthPlatformInfo[] justAuthPlatformInfos = JustAuthPlatformInfo.values();
         for (JustAuthPlatformInfo justAuthPlatformInfo : justAuthPlatformInfos) {
             map = new HashMap<>();
@@ -81,6 +85,7 @@ public enum JustAuthPlatformInfo {
             map.put("apiDoc", justAuthPlatformInfo.getApiDoc());
             map.put("since", justAuthPlatformInfo.getSince());
             map.put("enname", justAuthPlatformInfo.name().toLowerCase());
+            map.put("isLatest", justAuthPlatformInfo.isLatest());
             list.add(map);
         }
         return list;
@@ -100,5 +105,9 @@ public enum JustAuthPlatformInfo {
 
     public String getSince() {
         return since;
+    }
+
+    public boolean isLatest() {
+        return latest;
     }
 }

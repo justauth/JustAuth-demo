@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-    <title>JustAuth第三方登录</title>
+    <title>JustAuth 第三方登录组件</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
@@ -28,8 +28,8 @@
     </nav>
 
     <div class="jumbotron mt-2 p-4">
-        <h1 class="display-4">JustAuth</h1>
-        <p class="lead">JustAuth，如你所见，它仅仅是一个<strong>第三方授权登录</strong>的<strong>工具类库</strong>，它可以让我们脱离繁琐的第三方登录SDK，让登录变得 <strong>So easy!</strong></p>
+        <h1 class="display-4">JustAuth 第三方登录组件</h1>
+        <p class="lead">JustAuth 第三方登录组件，如你所见，它仅仅是一个<strong>第三方授权登录</strong>的<strong>工具类库</strong>，它可以让我们脱离繁琐的第三方登录SDK，让登录变得 <strong>So easy!</strong></p>
         <hr class="my-4">
         <a class="btn btn-info" href="https://gitee.com/yadong.zhang/JustAuth" target="_blank" role="button">Gitee <img src="https://gitee.com/yadong.zhang/JustAuth/badge/star.svg?theme=gvp" alt="star"></a>
         <a class="btn btn-info" href="https://github.com/zhangyd-c/JustAuth" target="_blank" role="button">Github <img src="https://img.shields.io/github/stars/zhangyd-c/JustAuth.svg?style=social" alt="github"></a>
@@ -43,6 +43,7 @@
                     <h5 class="card-title">
                         <img th:src="'https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.4/' + ${authPlatform.enname} + '.png'" alt="" style="width: 20px;position: relative;top: -2px;;" class="mr-1">
                         <a target="_blank" th:href="'http://127.0.0.1:' + ${port} + '/oauth/render/' + ${authPlatform.enname}" th:text="${authPlatform.name}"></a>
+                        <span th:if="${authPlatform.isLatest}" style="font-size: 13px;color: red;font-weight: bold">New</span>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted" th:text="'使用' + ${authPlatform.name} + '登录'"></h6>
                     <span class="badge badge-light ml-1" th:text="${authPlatform.since}"></span>
@@ -66,7 +67,7 @@
             <div class="card" style="width: 18rem;">
                 <img src="/img/wechat.jpg" class="card-img-top" alt="...">
                 <div class="card-body pt-2 pb-2">
-                    <p class="card-text">扫码备注“<strong>JustAuth</strong>”，进专属开发者群</p>
+                    <p class="card-text">扫码备注“<strong>JustAuth 第三方登录组件</strong>”，进专属开发者群</p>
                 </div>
             </div>
         </div>
@@ -85,7 +86,7 @@
             </button>
         </div>
         <div class="toast-body">
-            JustAuth，如你所见，它仅仅是一个第三方授权登录的工具类库，它可以让我们脱离繁琐的第三方登录SDK，让登录变得 So easy!
+            JustAuth 第三方登录组件，如你所见，它仅仅是一个第三方授权登录的工具类库，它可以让我们脱离繁琐的第三方登录SDK，让登录变得 So easy!
         </div>
     </div>
 
