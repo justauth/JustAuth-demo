@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-    <title>JustAuth 第三方登录组件</title>
+    <title>JustAuth第三方登录软件</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
@@ -28,8 +28,8 @@
     </nav>
 
     <div class="jumbotron mt-2 p-4">
-        <h1 class="display-4">JustAuth 第三方登录组件</h1>
-        <p class="lead">JustAuth 第三方登录组件，如你所见，它仅仅是一个<strong>第三方授权登录</strong>的<strong>工具类库</strong>，它可以让我们脱离繁琐的第三方登录SDK，让登录变得 <strong>So easy!</strong></p>
+        <h1 class="display-4">JustAuth第三方登录软件</h1>
+        <p class="lead">JustAuth第三方登录软件，如你所见，它仅仅是一个<strong>第三方授权登录</strong>的<strong>工具类库</strong>，它可以让我们脱离繁琐的第三方登录SDK，让登录变得 <strong>So easy!</strong></p>
         <hr class="my-4">
         <a class="btn btn-info" href="https://gitee.com/yadong.zhang/JustAuth" target="_blank" role="button">Gitee <img src="https://gitee.com/yadong.zhang/JustAuth/badge/star.svg?theme=gvp" alt="star"></a>
         <a class="btn btn-info" href="https://github.com/zhangyd-c/JustAuth" target="_blank" role="button">Github <img src="https://img.shields.io/github/stars/zhangyd-c/JustAuth.svg?style=social" alt="github"></a>
@@ -57,7 +57,7 @@
                     <td th:text="${user.uuid}" style="word-break: break-all;"></td>
                     <td><img th:src="${user.avatar}" width="20" alt=""></td>
                     <td th:text="${user.username}"></td>
-                    <td><img th:src="${'https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.1/' + #strings.toLowerCase(user.source) + '.png'}" th:title="${#strings.toLowerCase(user.source)}" width="20" alt=""></td>
+                    <td><img th:src="${'https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.6/' + #strings.toLowerCase(user.source) + '.png'}" th:title="${#strings.toLowerCase(user.source)}" width="20" alt=""></td>
                     <td><a href="javascript:;;" data-toggle="modal" data-target="#modal-show">查看详情</a><span th:text="${user.token.accessToken}" class="" style="display: none;"></span></td>
                     <td><a href="javascript:;;" data-toggle="modal" data-target="#modal-show">查看详情</a><span th:text="${user.rawUserInfo}" class="rawUserInfo" style="display: none;"></span></td>
                     <td><a href="javascript:;;" class="btn-refresh-token" th:data-uuid="${user.uuid}" th:data-source="${user.source}">refresh</a></td>
@@ -84,7 +84,7 @@
             <div class="card" style="width: 18rem;">
                 <img src="/img/wechat.jpg" class="card-img-top" alt="...">
                 <div class="card-body pt-2 pb-2">
-                    <p class="card-text">扫码备注“<strong>JustAuth 第三方登录组件</strong>”，进专属开发者群</p>
+                    <p class="card-text">扫码备注“<strong>JustAuth</strong>”，进JustAuth开源社区群</p>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
             </button>
         </div>
         <div class="toast-body">
-            JustAuth 第三方登录组件，如你所见，它仅仅是一个第三方授权登录的工具类库，它可以让我们脱离繁琐的第三方登录SDK，让登录变得 So easy!
+            JustAuth第三方登录软件，如你所见，它仅仅是一个第三方授权登录的工具类库，它可以让我们脱离繁琐的第三方登录SDK，让登录变得 So easy!
         </div>
     </div>
 
@@ -143,13 +143,13 @@
         <div class="toast-header">
             <img src="/img/justauth@0,75x.png" style="width: 20px;" class="rounded mr-2" alt="...">
             <strong class="mr-auto">常见问题-异常相关</strong>
-            <small class="text-muted"><a href="https://justauth.wiki/#/qa/error" target="_blank">查看原文</a></small>
+            <small class="text-muted"><a href="https://justauth.wiki/qa/error.html" target="_blank">查看原文</a></small>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="toast-body">
-            <iframe src="https://justauth.wiki/#/qa/error" frameborder="0" style="width: 100%"></iframe>
+            <iframe src="https://justauth.wiki/qa/error.html" frameborder="0" style="width: 100%"></iframe>
         </div>
     </div>
 
@@ -157,13 +157,13 @@
         <div class="toast-header">
             <img src="/img/justauth@0,75x.png" style="width: 20px;" class="rounded mr-2" alt="...">
             <strong class="mr-auto">常见问题-功能相关</strong>
-            <small class="text-muted"><a href="https://justauth.wiki/#/qa/func" target="_blank">查看原文</a></small>
+            <small class="text-muted"><a href="https://justauth.wiki/qa/func.html" target="_blank">查看原文</a></small>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="toast-body">
-            <iframe src="https://justauth.wiki/#/qa/func" frameborder="0" style="width: 100%"></iframe>
+            <iframe src="https://justauth.wiki/qa/func.html" frameborder="0" style="width: 100%"></iframe>
         </div>
     </div>
 </div>
@@ -180,9 +180,10 @@
 
         $('#modal-show').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
-            var rawUserInfo = button.parent().find('span');
+            var rawUserInfo = button.parent().find('span').text();
             var modal = $(this);
-            modal.find('.modal-body').html('').html(rawUserInfo.text());
+
+            modal.find('.modal-body').html('').html(rawUserInfo);
         });
 
         $(".btn-refresh-token").click(function () {
