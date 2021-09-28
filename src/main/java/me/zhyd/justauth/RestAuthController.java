@@ -1,6 +1,5 @@
 package me.zhyd.justauth;
 
-import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.xkcoding.http.config.HttpConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -195,7 +194,7 @@ public class RestAuthController {
                         .clientId("")
                         .clientSecret("")
                         .redirectUri("http://dblog-web.zhyd.me/oauth/callback/coding")
-                        .codingGroupName("")
+                        .domainPrefix("")
                         .scopes(Arrays.asList(
                                 AuthCodingScope.USER.getScope(),
                                 AuthCodingScope.USER_EMAIL.getScope(),
