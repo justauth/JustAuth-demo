@@ -30,6 +30,4 @@ HELP.md
 
 /doc/back.md
 /doc/live.md
-/logs/log.log
-/src/test/java/me/zhyd/justauth/justauthdemo/AuthTwitterRequestTest.java
-/src/test/java/me/zhyd/justauth/justauthdemo/AuthGithubRequestTest.java
+/logs/
