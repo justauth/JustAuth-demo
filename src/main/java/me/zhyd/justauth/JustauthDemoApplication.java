@@ -1,6 +1,7 @@
 package me.zhyd.justauth;
 
 import me.zhyd.justauth.service.UserService;
+import me.zhyd.oauth.cache.AuthCacheConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -31,6 +32,7 @@ public class JustauthDemoApplication implements ApplicationRunner {
     private UserService userService;
 
     public static void main(String[] args) {
+        AuthCacheConfig.timeout = 30 * 60 * 1000;
         SpringApplication.run(JustauthDemoApplication.class, args);
     }
 

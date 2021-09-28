@@ -57,7 +57,7 @@
                     <td th:text="${user.uuid}" style="word-break: break-all;"></td>
                     <td><img th:src="${user.avatar}" width="20" alt=""></td>
                     <td th:text="${user.username}"></td>
-                    <td><img th:src="${'https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.6/' + #strings.toLowerCase(user.source) + '.png'}" th:title="${#strings.toLowerCase(user.source)}" width="20" alt=""></td>
+                    <td><img th:src="${'https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.11/' + #strings.toLowerCase(user.source) + '.png'}" th:title="${#strings.toLowerCase(user.source)}" width="20" alt=""></td>
                     <td><a href="javascript:;;" data-toggle="modal" data-target="#modal-show">查看详情</a><span th:text="${user.token.accessToken}" class="" style="display: none;"></span></td>
                     <td><a href="javascript:;;" data-toggle="modal" data-target="#modal-show">查看详情</a><span th:text="${user.rawUserInfo}" class="rawUserInfo" style="display: none;"></span></td>
                     <td><a href="javascript:;;" class="btn-refresh-token" th:data-uuid="${user.uuid}" th:data-source="${user.source}">refresh</a></td>
@@ -109,6 +109,7 @@
     </div>
 </div>
 
+
 <div aria-live="polite" aria-atomic="true" style="position: fixed;min-height: 200px;top: 0;right: 0;">
     <!-- Then put toasts within -->
     <div class="toast" data-delay="30000" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
@@ -121,7 +122,20 @@
             </button>
         </div>
         <div class="toast-body">
-            JustAuth第三方登录软件，如你所见，它仅仅是一个第三方授权登录的工具类库，它可以让我们脱离繁琐的第三方登录SDK，让登录变得 So easy!
+            JustAuth第三方登录软件，如你所见，它仅仅是一个第三方授权登录的工具类库，它可以让我们脱离繁琐的第三方登录SDK，让登录变得 So easy！
+        </div>
+    </div>
+    <div class="toast" data-delay="30000" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="/img/justauth@0,75x.png" style="width: 20px;" class="rounded mr-2" alt="...">
+            <strong class="mr-auto">欢迎光临！</strong>
+            <small class="text-muted">just now</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            目前已支持Github、Gitee、微博、钉钉、百度、Coding、腾讯云开发者平台、OSChina、支付宝、QQ、微信、淘宝、Google、Facebook、抖音、领英、小米、微软、今日头条、Teambition、StackOverflow、Pinterest、人人、华为、企业微信、酷家乐、Gitlab、美团、饿了么、推特、飞书、京东、阿里云、喜马拉雅、Amazon、Slack和 Line 等第三方平台的授权登录。 Login, so easy!
         </div>
     </div>
 
@@ -136,34 +150,6 @@
         </div>
         <div class="toast-body">
             如你已配置完成，则可以直接点击对应平台的标题进行登录认证。
-        </div>
-    </div>
-
-    <div class="toast" data-delay="30000" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <img src="/img/justauth@0,75x.png" style="width: 20px;" class="rounded mr-2" alt="...">
-            <strong class="mr-auto">常见问题-异常相关</strong>
-            <small class="text-muted"><a href="https://justauth.wiki/qa/error.html" target="_blank">查看原文</a></small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            <iframe src="https://justauth.wiki/qa/error.html" frameborder="0" style="width: 100%"></iframe>
-        </div>
-    </div>
-
-    <div class="toast" data-delay="30000" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <img src="/img/justauth@0,75x.png" style="width: 20px;" class="rounded mr-2" alt="...">
-            <strong class="mr-auto">常见问题-功能相关</strong>
-            <small class="text-muted"><a href="https://justauth.wiki/qa/func.html" target="_blank">查看原文</a></small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            <iframe src="https://justauth.wiki/qa/func.html" frameborder="0" style="width: 100%"></iframe>
         </div>
     </div>
 </div>

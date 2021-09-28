@@ -10,7 +10,7 @@
     </parent>
     <groupId>me.zhyd.justauth</groupId>
     <artifactId>justauth-demo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>justauth-demo</name>
     <description>JustAuth项目的demo</description>
 
@@ -63,7 +63,7 @@
         <dependency>
             <groupId>me.zhyd.oauth</groupId>
             <artifactId>JustAuth</artifactId>
-            <version>1.15.9</version>
+            <version>1.16.4</version>
         </dependency>
         <!--
             @since 1.14.0 抽取HTTP，具体实现交给开发者，解耦 hutool-http，开发者可以视自己项目的依赖决定使用何种HTTP方式。
@@ -79,7 +79,6 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-http</artifactId>
             <version>5.1.0</version>
-            <scope>provided</scope>
         </dependency>
         <!--<dependency>
             <groupId>com.squareup.okhttp3</groupId>
@@ -106,6 +105,18 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.2.2.RELEASE</version>
+                <configuration>
+                    <mainClass>me.zhyd.justauth.JustauthDemoApplication</mainClass>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

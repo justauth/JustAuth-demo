@@ -16,15 +16,15 @@ public enum JustAuthPlatformInfo {
     /**
      * 平台
      */
-    GITEE("Gitee", "https://docs.justauth.whnb.wang/#/oauth/gitee", "", "v1.0.1", false),
+    GITEE("Gitee", "", "", "v1.0.1", false),
     BAIDU("百度", "", "", "v1.0.1", false),
-    CODING("coding", "https://docs.justauth.whnb.wang/#/oauth/coding", "", "v1.0.1", false),
+    CODING("coding", "", "", "v1.0.1", false),
     CSDN("CSDN", "", "", "v1.0.1", false),
-    DINGTALK("钉钉", "", "", "v1.0.1", false),
-    GITHUB("Github", "https://docs.justauth.whnb.wang/#/oauth/github", "", "v1.0.1", false),
+    DINGTALK("钉钉扫码登录", "", "", "v1.0.1", false),
+    GITHUB("Github", "", "", "v1.0.1", false),
     OSCHINA("开源中国", "", "", "v1.0.1", false),
-    ALIPAY("支付宝", "https://docs.justauth.whnb.wang/#/oauth/alipay", "", "v1.0.1", false),
-    WEIBO("微博", "https://docs.justauth.whnb.wang/#/oauth/weibo", "", "v1.0.1", false),
+    ALIPAY("支付宝", "", "", "v1.0.1", false),
+    WEIBO("微博", "", "", "v1.0.1", false),
 
     DOUYIN("抖音", "", "", "v1.4.0", false),
     ELEME("饿了么", "", "", "v1.12.0", false),
@@ -33,38 +33,44 @@ public enum JustAuthPlatformInfo {
     GOOGLE("Google", "", "", "v1.3.0", false),
     HUAWEI("华为", "", "", "v1.10.0", false),
     JD("京东", "", "", "v1.15.1", false),
-    KUJIALE("酷家乐", "https://docs.justauth.whnb.wang/#/oauth/kujiale", "", "v1.11.0", false),
+    KUJIALE("酷家乐", "", "", "v1.11.0", false),
     LINKEDIN("领英", "", "", "v1.4.0", false),
     MEITUAN("美团", "", "", "v1.12.0", false),
     MICROSOFT("微软", "", "", "v1.5.0", false),
     MI("小米", "", "", "v1.5.0", false),
     PINTEREST("Pinterest", "", "", "v1.9.0", false),
-    QQ("QQ", "https://docs.justauth.whnb.wang/#/oauth/qq", "", "v1.1.0", false),
+    QQ("QQ", "", "", "v1.1.0", false),
     RENREN("人人", "", "", "v1.9.0", false),
     STACK_OVERFLOW("Stack Overflow", "", "", "v1.9.0", false),
     TAOBAO("淘宝", "", "", "v1.2.0", false),
     TEAMBITION("Teambition", "", "", "v1.9.0", false),
     WECHAT_ENTERPRISE("企业微信二维码登录", "", "", "v1.10.0", false),
     WECHAT_MP("微信公众平台", "", "", "v1.14.0", false),
-    WECHAT_OPEN("微信开放平台", "https://docs.justauth.whnb.wang/#/oauth/wechat_open", "", "v1.1.0", false),
+    WECHAT_OPEN("微信开放平台", "", "", "v1.1.0", false),
     TOUTIAO("今日头条", "", "", "v1.6.0-beta", false),
-    TWITTER("推特", "https://docs.justauth.whnb.wang/#/oauth/twitter", "", "v1.13.0", false),
-    ALIYUN("阿里云", "https://docs.justauth.whnb.wang/#/oauth/aliyun", "", "v1.15.5", false),
+    TWITTER("推特", "", "", "v1.13.0", false),
+    ALIYUN("阿里云", "", "", "v1.15.5", false),
     MYGITLAB("自定义的Gitlab", "", "", "v1.13.0", false),
-    XMLY("喜马拉雅", "", "", "v1.15.9", true),
-    WECHAT_ENTERPRISE_WEB("企业微信网页登录", "", "", "v1.15.9", true),
-    FEISHU("飞书", "", "", "1.15.9", true),
+    XMLY("喜马拉雅", "", "", "v1.15.9", false),
+    WECHAT_ENTERPRISE_WEB("企业微信网页登录", "", "", "v1.15.9", false),
+    FEISHU("飞书", "", "", "1.15.9", false),
+    AMAZON("Amazon", "", "", "1.16.0", true),
+    DINGTALK_ACCOUNT("钉钉账号登录", "", "", "v1.16.0", true),
+    SLACK("slack 登录", "", "", "v1.16.0", true),
+    LINE("line 登录", "", "", "v1.16.0", true),
+    okta("Okta 登录", "", "", "v1.16.0", true),
+    proginn("程序员客栈", "", "", "v1.16.2", true),
     ;
 
     // 平台名
-    private String name;
+    private final String name;
     // 帮助文档
-    private String readme;
+    private final String readme;
     // 官网api文档
-    private String apiDoc;
+    private final String apiDoc;
     // 集成该平台的 版本
-    private String since;
-    private boolean latest;
+    private final String since;
+    private final boolean latest;
 
     JustAuthPlatformInfo(String name, String readme, String apiDoc, String since, boolean latest) {
         this.name = name;

@@ -33,25 +33,34 @@
         <hr class="my-4">
         <a class="btn btn-info" href="https://gitee.com/yadong.zhang/JustAuth" target="_blank" role="button">Gitee <img src="https://gitee.com/yadong.zhang/JustAuth/badge/star.svg?theme=gvp" alt="star"></a>
         <a class="btn btn-info" href="https://github.com/zhangyd-c/JustAuth" target="_blank" role="button">Github <img src="https://img.shields.io/github/stars/zhangyd-c/JustAuth.svg?style=social" alt="github"></a>
-        <a class="btn btn-light" href="https://docs.justauth.whnb.wang" target="_blank" role="button">帮助文档</a>
+        <a class="btn btn-light" href="https://justauth.wiki" target="_blank" role="button">帮助文档</a>
     </div>
 
     <div class="row mt-3">
         <div class="col col-3 pt-1 pb-1" th:each="authPlatform : ${enableAuthPlatforms}">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <img th:src="'https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.6/' + ${authPlatform.enname} + '.png'" alt="" style="width: 20px;position: relative;top: -2px;;" class="mr-1">
+                    <h5 class="card-title" style="font-size: 16px;">
+                        <img th:src="'https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.11/' + ${authPlatform.enname} + '.png'" alt="" style="width: 20px;position: relative;top: -2px;;" class="mr-1">
                         <a target="_blank" th:href="'http://127.0.0.1:' + ${port} + '/oauth/render/' + ${authPlatform.enname}" th:text="${authPlatform.name}"></a>
+                        <span class="badge badge-light ml-1" th:text="${authPlatform.since}"></span>
                         <span th:if="${authPlatform.isLatest}" style="font-size: 13px;color: red;font-weight: bold">New</span>
                     </h5>
-                    <h6 class="card-subtitle mb-2 text-muted" th:text="'使用' + ${authPlatform.name} + '登录'"></h6>
-                    <span class="badge badge-light ml-1" th:text="${authPlatform.since}"></span>
+<!--                    <h6 class="card-subtitle mb-2 text-muted" th:text="'使用' + ${authPlatform.name} + '登录'"></h6>-->
+
                     <a th:if="${authPlatform.readme} ne ''" th:href="${authPlatform.readme}" target="_blank" class="card-link">帮助文档</a>
                     <a th:if="${authPlatform.apiDoc} ne ''" th:href="${authPlatform.apiDoc}" target="_blank" class="card-link ml-1">官方文档</a>
                 </div>
             </div>
         </div>
+    </div>
+    <hr class="my-4">
+    <div class="row mt-3" style="justify-content: center;">
+        <ul class="list-unstyled list-inline" style="width: 500px">
+            <li class="list-inline-item" th:each="authPlatform : ${enableAuthPlatforms}" th:if="${authPlatform.enname != 'mygitlab'}">
+                <img class="mr-1" th:src="'https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.10/' + ${authPlatform.enname} + '.png'" alt="" style="width: 32px;position: relative;top: -2px;border-radius: 50%;padding: 1px;border: 1px solid #EEE;">
+            </li>
+        </ul>
     </div>
     <hr class="my-4">
     <div class="row mt-3 mb-4 justify-content-center">
@@ -86,7 +95,20 @@
             </button>
         </div>
         <div class="toast-body">
-            JustAuth第三方登录软件，如你所见，它仅仅是一个第三方授权登录的工具类库，它可以让我们脱离繁琐的第三方登录SDK，让登录变得 So easy!
+            JustAuth第三方登录软件，如你所见，它仅仅是一个第三方授权登录的工具类库，它可以让我们脱离繁琐的第三方登录SDK，让登录变得 So easy！
+        </div>
+    </div>
+    <div class="toast" data-delay="30000" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="/img/justauth@0,75x.png" style="width: 20px;" class="rounded mr-2" alt="...">
+            <strong class="mr-auto">欢迎光临！</strong>
+            <small class="text-muted">just now</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            目前已支持Github、Gitee、微博、钉钉、百度、Coding、腾讯云开发者平台、OSChina、支付宝、QQ、微信、淘宝、Google、Facebook、抖音、领英、小米、微软、今日头条、Teambition、StackOverflow、Pinterest、人人、华为、企业微信、酷家乐、Gitlab、美团、饿了么、推特、飞书、京东、阿里云、喜马拉雅、Amazon、Slack和 Line 等第三方平台的授权登录。 Login, so easy!
         </div>
     </div>
 
@@ -101,34 +123,6 @@
         </div>
         <div class="toast-body">
             如你已配置完成，则可以直接点击对应平台的标题进行登录认证。
-        </div>
-    </div>
-
-    <div class="toast" data-delay="30000" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <img src="/img/justauth@0,75x.png" style="width: 20px;" class="rounded mr-2" alt="...">
-            <strong class="mr-auto">常见问题-异常相关</strong>
-            <small class="text-muted"><a href="https://justauth.wiki/qa/error.html" target="_blank">查看原文</a></small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            <iframe src="https://justauth.wiki/qa/error.html" frameborder="0" style="width: 100%"></iframe>
-        </div>
-    </div>
-
-    <div class="toast" data-delay="30000" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <img src="/img/justauth@0,75x.png" style="width: 20px;" class="rounded mr-2" alt="...">
-            <strong class="mr-auto">常见问题-功能相关</strong>
-            <small class="text-muted"><a href="https://justauth.wiki/qa/func.html" target="_blank">查看原文</a></small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            <iframe src="https://justauth.wiki/qa/func.html" frameborder="0" style="width: 100%"></iframe>
         </div>
     </div>
 </div>
